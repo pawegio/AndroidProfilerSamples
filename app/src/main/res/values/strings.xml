@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android Profiler Samples</string>
+    <string name="refresh_data">Refresh data</string>
 </resources>

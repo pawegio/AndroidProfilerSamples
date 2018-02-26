@@ -3,15 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="16dp"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/nameView"
-        style="@style/TextAppearance.AppCompat.Medium"
+        android:id="@+id/dateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:fontFamily="sans-serif-medium"
         android:lines="1"
-        tools:text="@tools:sample/date/mmddyy" />
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    <TextView
+        android:id="@+id/remainingTimeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:lines="1"
+        tools:text="Remaining: 2 d 1 h 23 min 5 s" />
 
 </LinearLayout>

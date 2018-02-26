@@ -33,29 +33,34 @@ class MainActivity : AppCompatActivity() {
 
 private fun createRandomItems(): List<Item> {
     val now = LocalDateTime.now()
-    return List(1_000) { createItem(it + 1, now) }
+    return List(1_000) { createItem(now, it + 1) }
 }
 
-private fun createItem(offset: Int, now: LocalDateTime): Item {
+private fun createItem(now: LocalDateTime, offset: Int): Item {
     val date = now.plusDays(offset.toLong()).toLocalDate().atStartOfDay()
-    val duration = getDuration(now, date)
-    return Item("${date.format(DateTimeFormatter.ISO_LOCAL_DATE)} - $duration")
+    return Item(
+        formattedDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE),
+        remainingTime = getRemainingTime(now, date)
+    )
 }
 
-private fun getDuration(from: LocalDateTime, to: LocalDateTime): String {
-    val duration = Duration.between(from, to)
-    val hours = duration.toHours()
-    val minutes = duration.minusHours(hours).toMinutes()
-    val seconds = duration.minusHours(hours).minusMinutes(minutes).seconds
+private fun getRemainingTime(start: LocalDateTime, end: LocalDateTime): String {
+    val duration = Duration.between(start, end)
+    val days = duration.toDays()
+    val hours = duration.minusDays(days).toHours()
+    val minutes = duration.minusDays(days).minusHours(hours).toMinutes()
+    val seconds = duration.minusDays(days).minusHours(hours).minusMinutes(minutes).seconds
     return buildString {
-        if (hours > 0) append("$hours h")
-        append(" $minutes min")
-        if (seconds > 0) append(" $seconds sec")
+        if (days > 0) append("$days d")
+        if (hours > 0) append(" $hours h")
+        if (minutes > 0) append(" $minutes min")
+        if (seconds > 0) append(" $seconds s")
     }.trim()
 }
 
-private fun bindItem(holder: ViewHolderBinder<Item>, item: Item) {
-    holder.itemView.nameView.text = item.name
+private fun bindItem(holder: ViewHolderBinder<Item>, item: Item) = with(holder.itemView) {
+    dateView.text = item.formattedDate
+    remainingTimeView.text = resources.getString(R.string.remaining, item.remainingTime)
 }
 
-private data class Item(val name: String)
+private data class Item(val formattedDate: String, val remainingTime: String)

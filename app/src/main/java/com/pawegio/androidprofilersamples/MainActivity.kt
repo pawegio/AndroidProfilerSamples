@@ -24,10 +24,13 @@ class MainActivity : AppCompatActivity() {
         )
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
-        refreshDataButton.setOnClickListener {
-            items.run { clear(); addAll(createRandomItems()) }
-            recyclerView.adapter.notifyDataSetChanged()
-        }
+        swipeRefreshLayout.setOnRefreshListener(::refreshData)
+    }
+
+    private fun refreshData() {
+        items.run { clear(); addAll(createRandomItems()) }
+        recyclerView.adapter.notifyDataSetChanged()
+        swipeRefreshLayout.isRefreshing = false
     }
 }
 

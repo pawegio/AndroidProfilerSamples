@@ -26,13 +26,13 @@ class Sample1Activity : AppCompatActivity() {
     }
 
     private fun refreshData() {
-        items.run { clear(); addAll(createRandomItems()) }
+        items.run { clear(); addAll(generateItems()) }
         recyclerView.adapter.notifyDataSetChanged()
         swipeRefreshLayout.isRefreshing = false
     }
 }
 
-private fun createRandomItems(): List<Item> {
+private fun generateItems(): List<Item> {
     val now = LocalDateTime.now()
     return List(1_000) { createItem(now, it + 1) }
 }

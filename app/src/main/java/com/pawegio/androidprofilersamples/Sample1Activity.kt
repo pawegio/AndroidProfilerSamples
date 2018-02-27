@@ -2,7 +2,6 @@ package com.pawegio.androidprofilersamples
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
 import com.elpassion.android.commons.recycler.adapters.basicAdapterWithLayoutAndBinder
 import com.elpassion.android.commons.recycler.basic.ViewHolderBinder
 import kotlinx.android.synthetic.main.sample_1_activity.*
@@ -22,7 +21,6 @@ class Sample1Activity : AppCompatActivity() {
         recyclerView.adapter = basicAdapterWithLayoutAndBinder(
             items, R.layout.simple_list_item, ::bindItem
         )
-        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         swipeRefreshLayout.setOnRefreshListener(::refreshData)
     }

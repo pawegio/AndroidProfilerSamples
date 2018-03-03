@@ -34,15 +34,7 @@ class Sample1Activity : AppCompatActivity() {
 
 private fun generateItems(): List<Item> {
     val now = LocalDateTime.now()
-    return List(1_000) { createItem(now, it + 1) }
-}
-
-private fun createItem(now: LocalDateTime, offset: Int): Item {
-    val date = now.plusDays(offset.toLong()).toLocalDate().atStartOfDay()
-    return Item(
-        formattedDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE),
-        remainingTime = getRemainingTime(now, date)
-    )
+    return List(1_000) { Item(now, it + 1) }
 }
 
 private fun getRemainingTime(start: LocalDateTime, end: LocalDateTime): String {
@@ -60,8 +52,10 @@ private fun getRemainingTime(start: LocalDateTime, end: LocalDateTime): String {
 }
 
 private fun bindItem(holder: ViewHolderBinder<Item>, item: Item) = with(holder.itemView) {
-    dateView.text = item.formattedDate
-    remainingTimeView.text = resources.getString(R.string.remaining, item.remainingTime)
+    val date = item.now.plusDays(item.offset.toLong()).toLocalDate().atStartOfDay()
+    val remainingTime = getRemainingTime(item.now, date)
+    dateView.text = date.format(DateTimeFormatter.ISO_LOCAL_DATE)
+    remainingTimeView.text = resources.getString(R.string.remaining, remainingTime)
 }
 
-private data class Item(val formattedDate: String, val remainingTime: String)
+private data class Item(val now: LocalDateTime, val offset: Int)

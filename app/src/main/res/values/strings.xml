@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Android Profiler Samples</string>
-    <string name="sample_1">Android Profiler - Sample 1</string>
+    <string name="sample_2">Android Profiler - Sample 2</string>
     <string name="remaining">Remaining: %s</string>
 </resources>

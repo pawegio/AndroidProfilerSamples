@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Sample1Activity"
-            android:label="@string/sample_1">
+            android:label="@string/sample_1"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

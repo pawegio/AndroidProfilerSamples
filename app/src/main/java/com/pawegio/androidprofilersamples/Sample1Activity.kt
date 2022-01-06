@@ -1,7 +1,7 @@
 package com.pawegio.androidprofilersamples
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.elpassion.android.commons.recycler.adapters.basicAdapterWithLayoutAndBinder
 import com.elpassion.android.commons.recycler.basic.ViewHolderBinder
 import kotlinx.android.synthetic.main.sample_1_activity.*
@@ -27,14 +27,14 @@ class Sample1Activity : AppCompatActivity() {
 
     private fun refreshData() {
         items.run { clear(); addAll(generateItems()) }
-        recyclerView.adapter.notifyDataSetChanged()
+        recyclerView.adapter?.notifyDataSetChanged()
         swipeRefreshLayout.isRefreshing = false
     }
 }
 
 private fun generateItems(): List<Item> {
     val now = LocalDateTime.now()
-    return List(1_000) { createItem(now, it + 1) }
+    return List(100_000) { createItem(now, it + 1) }
 }
 
 private fun createItem(now: LocalDateTime, offset: Int): Item {
